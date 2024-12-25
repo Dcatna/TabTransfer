@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@types/chrome": "^0.0.287"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "javascript": "^1.0.0",
+    "typescript": "^5.7.2"
+  }
+}

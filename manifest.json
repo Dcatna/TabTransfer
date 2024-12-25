@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Tab Transfer",
+    "version": "1.0",
+    "description": "Save and sync your open tabs.",
+    "permissions": ["tabs", "storage"],
+    
+    "background": {
+      "service_worker": "transfer.js"
+    },
+    "action": {
+      "default_popup": "popup.html"
+      
+    }
+  }
