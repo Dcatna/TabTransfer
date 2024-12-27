@@ -6,7 +6,7 @@
     "permissions": ["tabs", "storage"],
     
     "background": {
-      "service_worker": "transfer.js"
+     
     },
     "action": {
       "default_popup": "popup.html"
