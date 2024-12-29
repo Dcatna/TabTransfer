@@ -1,15 +1,12 @@
 {
-    "manifest_version": 3,
-    "name": "Tab Transfer",
-    "version": "1.0",
-    "description": "Save and sync your open tabs.",
-    "permissions": ["tabs", "storage"],
-    
-    "background": {
-     
-    },
-    "action": {
+  "manifest_version": 3,
+  "name": "Tab Transfer",
+  "version": "1.0",
+  "description": "Save and sync your open tabs.",
+  "permissions": ["tabs", "storage"],
+  "action": {
       "default_popup": "popup.html"
       
-    }
   }
+
+}
