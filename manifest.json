@@ -5,8 +5,13 @@
   "description": "Save and sync your open tabs.",
   "permissions": ["tabs", "storage"],
   "action": {
-      "default_popup": "popup.html"
-      
-  }
-
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["home.html", "signup.html"], 
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
+

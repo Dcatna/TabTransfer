@@ -55,9 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log(error);
                 } else {
                     status.textContent = "Login successful!";
-                    console.log("User session:", data);
+                    console.log("EHLLO")
+                    console.log(window.location.href, "LOCATION")
+                    console.log("User session: ", data);
+                    window.location.href = "home.html"
                 }
             }
         });
     }
+
+    
 });
