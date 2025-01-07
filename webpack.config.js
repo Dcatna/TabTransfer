@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     popup: './popup.js', // Entry point for popup
     signup: './signup.js', // Entry point for signin
+    home: './home.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
