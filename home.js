@@ -54,20 +54,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Restore Tabs Button
     const restoreTabsButton = document.getElementById("restoreTabs");
     if (restoreTabsButton) {
-        restoreTabsButton.addEventListener("click", () => {
-            chrome.storage.local.get("savedTabs", (data) => {
-                const list = document.getElementById("savedTabList");
-                if (list) {
-                    list.innerHTML = ""; // Clear the list
-                    if (data.savedTabs) {
-                        data.savedTabs.forEach((url) => {
-                            const li = document.createElement("li");
-                            li.textContent = url;
-                            list.appendChild(li);
-                        });
-                    }
+        restoreTabsButton.addEventListener("click", async () => {
+
+            const {data, error} = await supabase.from("Tabs").select("url").eq("user_id", user_id).order("created_at", {ascending: false}).limit(1)
+            console.log(data)
+            if (error) {
+                console.error("Error inserting tab:", error.message);
+                return
+            } 
+            if (data.length > 0) {
+                let most_recent = data[0].created_at
+
+                const {data, error } = await supabase.from("Tabs").select("url").eq("user_id").eq("created_at", most_recent)
+
+                if (error ) {
+                    console.error("Error fetching tbas")
+                    return
                 }
-            });
+
+                data.forEach((tab) => {
+                    chrome.tabs.create({url: tab.url})
+                })
+            }
         });
     }
 })
