@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     console.log(user, "USER")
     // Assign user data if session exists
-    let user_id = user.data.id || null;
-
+    let user_id = user.data.user.id || null;
+    console.log(user_id)
     // Save Tabs Button
     const saveTabsButton = document.getElementById("saveTabs");
     if (saveTabsButton) {
