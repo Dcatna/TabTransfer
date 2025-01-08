@@ -56,19 +56,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (restoreTabsButton) {
         restoreTabsButton.addEventListener("click", async () => {
 
-            const {data, error} = await supabase.from("Tabs").select("url").eq("user_id", user_id).order("created_at", {ascending: false}).limit(1)
-            console.log(data)
+            const {data: latestTabs, error} = await supabase.from("Tabs").select("*").eq("user_id", user_id).order("created_at", {ascending: false})
+            console.log(latestTabs)
             if (error) {
                 console.error("Error inserting tab:", error.message);
                 return
             } 
-            if (data.length > 0) {
-                let most_recent = data[0].created_at
+            if (latestTabs.length > 0 && latestTabs) {
+                console.log(latestTabs)
+                let most_recent = latestTabs[0].created_at
 
-                const {data, error } = await supabase.from("Tabs").select("url").eq("user_id").eq("created_at", most_recent)
+                const {data, error } = await supabase.from("Tabs").select("url").eq("user_id", user_id).eq("created_at", most_recent)
 
                 if (error ) {
-                    console.error("Error fetching tbas")
+                    console.error("Error fetching tbas", error.message)
                     return
                 }
 
