@@ -7,13 +7,52 @@ let supabase = createClient(
 );
 
 
+
 document.addEventListener("DOMContentLoaded", async () => {
     let user = await supabase.auth.getUser()
-    
+    let user_id = user.data.user.id || null;
+
+    async function getUserLists() {
+        const {data, error } = await supabase.from("Groups").select("*").eq("user_id", user_id)
+        if(error) {
+            console.log(error, "ERROR")
+            return []
+        }
+        return data
+    }
+
+    async function renderUserLists() {
+        const userListsContainer = document.getElementById("userLists");
+        const lists = await getUserLists();
+
+        if (lists.length === 0) {
+            userListsContainer.innerHTML = "<p>No lists found.</p>";
+            return;
+        }
+
+        userListsContainer.innerHTML = ""; // Clear existing content
+
+        lists.forEach(list => {
+            const listElement = document.createElement("div");
+            listElement.style.border = "1px solid #ccc";
+            listElement.style.padding = "10px";
+            listElement.style.marginBottom = "10px";
+            listElement.style.borderRadius = "5px";
+            listElement.style.backgroundColor = "#f9f9f9";
+
+            listElement.innerHTML = `
+                <h3>${list.group_name}</h3>
+                <p>${list.description || "No description available"}</p>
+            `;
+
+            userListsContainer.appendChild(listElement);
+        });
+    }
+
+    renderUserLists();
 
     console.log(user, "USER")
     // Assign user data if session exists
-    let user_id = user.data.user.id || null;
     console.log(user_id)
     // Save Tabs Button
     const saveTabsButton = document.getElementById("saveTabs");
