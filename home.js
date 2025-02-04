@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         "created_at": date,
                         "url": tab.url,
                         "favicon_url": tab.favIconUrl || null, // Use tab.favIconUrl for favicon
+                        "title" : tab.title
                     }).then(({ error }) => {
                         if (error) {
                             console.error("Error inserting tab:", error.message);

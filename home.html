@@ -4,13 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tab Sync</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 10px;
+      width: 250px;
+    }
+
+    button {
+      background-color: #ffcc00; /* Yellow */
+      color: #333;
+      border: none;
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffa500; 
+    }
+
+    #userLists {
+      margin-top: 15px;
+      max-height: 300px; 
+      overflow-y: auto;  
+      padding-right: 5px; 
+    }
+
+    
+    #userLists::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #userLists::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    #userLists::-webkit-scrollbar-thumb {
+      background: #ffa500; 
+      border-radius: 10px;
+    }
+
+    #userLists::-webkit-scrollbar-thumb:hover {
+      background: #ff8800;  
+    }
+
+    .list-item {
+      background-color: white;
+      border: 2px solid #ffa500; 
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .list-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .list-item h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .list-item p {
+      margin: 5px 0 0;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <button id="restoreTabs">Restore</button>
-    <button id="saveTabs">Save Tabs</button>
+    <button id="restoreTabs">Restore Tabs</button>
+    <button id="saveTabs">Save Current Tabs</button>
 
-    <!-- Container for displaying user lists -->
-    <div id="userLists" style="margin-top: 20px;"></div>
+    <!-- Scrollable container for user lists -->
+    <div id="userLists"></div>
 
     <script src="dist/home.bundle.js"></script>
 </body>

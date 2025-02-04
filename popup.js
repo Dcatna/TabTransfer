@@ -5,8 +5,13 @@ let supabase = createClient(
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkaW1ha252ZGh4cGNidmNjdGVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxMDY2MjcsImV4cCI6MjA1MDY4MjYyN30.V1nhLL5fNaaI7CClwHoGKNiVFiKaAr_l9h993MGUXDk"
 );
 
-document.addEventListener("DOMContentLoaded", () => {
-   
+document.addEventListener("DOMContentLoaded", async () => {
+    const { data: { session } } = await supabase.auth.getSession(); //check if user is already authenticated
+
+    if (session) {
+        console.log("User is already logged in:", session.user);
+        window.location.href = "home.html";
+    }
     // Login Button
     const loginButton = document.getElementById("loginButton");
     if (loginButton) {
