@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     let user = await supabase.auth.getUser()
     let user_id = user.data.user.id || null;
 
+    
+
     async function getUserLists() {
         const {data, error } = await supabase.from("Groups").select("*").eq("user_id", user_id)
         if(error) {
@@ -91,6 +93,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+    const signoutButton = document.getElementById("signout");
+    if (signoutButton) {
+        signoutButton.addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.href = "popup.html";
+        });
+    }
     // Restore Tabs Button
     const restoreTabsButton = document.getElementById("restoreTabs");
     if (restoreTabsButton) {
