@@ -82,9 +82,26 @@
       color: #666;
       font-size: 14px;
     }
+
+    a {
+      margin: 5px 0;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      color:#ffcc00;
+      font-weight: bold;
+      text-decoration: none; /* Ensure no underline by default */
+
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
+    <a href="https://tabtransfer.org" target="_blank" rel="noopener noreferrer">Go to website -></a>
     <button id="signout">Signout</button>  
     <button id="restoreTabs">Restore Tabs</button>
     <button id="saveTabs">Save Current Tabs</button>

@@ -23,6 +23,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         return data
     }
 
+    function openListItems(tabs) {
+        tabs.forEach((tab) => {
+            chrome.tabs.create({url: tab.url})
+        })
+    }
+
+    async function getUserListItems(group_name) {
+        const {data, error} = await supabase.from("GroupItems").select("*").eq("user_id", user_id).eq("group_name", group_name)
+
+        if(error) {
+            console.log(error)
+            throw error
+        }
+
+        return data
+    }
+
+    async function onClickList(list) {
+        const res = await getUserListItems(list.group_name)
+        openListItems(res)
+    }
+
     async function renderUserLists() {
         const userListsContainer = document.getElementById("userLists");
         const lists = await getUserLists();
@@ -36,19 +58,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         lists.forEach(list => {
             const listElement = document.createElement("div");
+            listElement.id = "userListItem";
             listElement.style.border = "1px solid #ccc";
             listElement.style.padding = "10px";
             listElement.style.marginBottom = "10px";
             listElement.style.borderRadius = "5px";
             listElement.style.backgroundColor = "#f9f9f9";
-
             listElement.innerHTML = `
                 <h3>${list.group_name}</h3>
                 <p>${list.description || "No description available"}</p>
             `;
-
+        
+            // Add hover effect
+            listElement.addEventListener("mouseover", () => {
+                listElement.style.backgroundColor = "#ddd"; // Gray on hover
+            });
+        
+            listElement.addEventListener("mouseout", () => {
+                listElement.style.backgroundColor = "#f9f9f9"; // Restore original color
+            });
+            listElement.addEventListener("click", () => onClickList(list))
             userListsContainer.appendChild(listElement);
         });
+        
     }
 
     renderUserLists();
