@@ -40,5 +40,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       createClient: ['@supabase/supabase-js', 'createClient'],
     }),
+
   ],
 };
